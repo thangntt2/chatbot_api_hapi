@@ -1,24 +1,24 @@
 {
-  "name": "hapi-boilerplate",
+  "name": "Vizbot",
   "version": "0.0.1",
-  "description": "Hapi.js boilerplate",
+  "description": "Vietnamese chatbot api server build on greate Hapi.js boilerplate by Yoshi",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vietthang/hapi-boilerplate.git"
+    "url": "git+https://github.com/thangntt2/chatbot_api_hapi.git"
   },
   "keywords": [
-    "hapi",
-    "boilerplate",
-    "promise",
-    "async"
+    "chatbot",
+    "nlp",
+    "vietanmese",
+    "vizbot"
   ],
-  "author": "Yoshi",
+  "author": "Thangntt",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vietthang/hapi-boilerplate/issues"
+    "url": "https://github.com/thangntt2/chatbot_api_hapi/issues"
   },
-  "homepage": "https://github.com/vietthang/hapi-boilerplate#readme",
+  "homepage": "http://thangntt.com",
   "scripts": {
     "build:production": "NODE_ENV=production webpack --config scripts/webpack.config.production.js",
     "build:db": "NODE_ENV=production webpack --config scripts/webpack.config.db.js",

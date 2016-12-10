@@ -1,11 +1,11 @@
 import uuid from 'uuid'
 
 import Model from '../components/orm'
-import { get as ResourceSchema } from '../schemas/models/resource.yaml'
+import { entity as EntitySchema } from '../schemas/models/entity.yaml'
 
 export default class Resource extends Model {
 
-  static schema = ResourceSchema;
+  static schema = EntitySchema
 
   constructor(...args) {
     super(...args)
@@ -16,11 +16,7 @@ export default class Resource extends Model {
   }
 
   get tableName() {
-    return 'Resource'
-  }
-
-  contents() {
-    return this.hasMany('Content', 'resourceId')
+    return 'Entity'
   }
 
 }

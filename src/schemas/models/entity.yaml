@@ -1,0 +1,13 @@
+Entity:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+    name:
+      type: string
+    type:
+      type: string
+      enum: ['trait', 'freetext', 'keyword']
+    color:
+      type: string

@@ -1,237 +1,113 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
 swagger: '2.0'
+
+# This is your document metadata
 info:
-  version: 1.0.0
-  title: Hapi boilerplate
+  version: "0.0.0"
+  title: Vizbot API
+
 basePath: /api/v1
-schemes:
-  - http
-  - https
-consumes:
-  - application/json
-  - application/x-www-form-urlencoded
-  - multipart/form-data
-  - text/plain
-produces:
-  - application/json
-paths:
-  /resources:
-    get:
-      operationId: findResource
-      description: Get list of resources
-      tags:
-        - resource
-      parameters:
-        - $ref: './common.yaml#/parameters/LimitQuery'
-        - $ref: './common.yaml#/parameters/OffsetQuery'
-        - $ref: './common.yaml#/parameters/OrderByQuery'
-        - $ref: './common.yaml#/parameters/OrderDirectionQuery'
-      responses:
-        200:
-          description: List of Resource
-          headers:
-            x-meta-total:
-              type: integer
-              minimum: 0
-              description: Get total number of entries in database
-          schema:
-            type: array
-            items:
-              $ref: './models/resource.yaml#/get'
-    post:
-      operationId: createResource
-      description: Create new resource
-      tags:
-        - resource
-      parameters:
-        - name: model
-          in: body
-          required: true
-          schema:
-            $ref: './models/resource.yaml#/create'
-      responses:
-        200:
-          description: Resource response
-          schema:
-            $ref: './models/resource.yaml#/get'
-
-  /resources/{id}:
-    get:
-      operationId: getResource
-      description: Get resource by ID
-      tags:
-        - resource
-      parameters:
-        - $ref: '#/parameters/ResourceIdParam'
-      responses:
-        200:
-          description: Resource response
-          schema:
-            $ref: './models/resource.yaml#/get'
-    put:
-      operationId: updateResource
-      description: Update resource by ID
-      tags:
-        - resource
-      parameters:
-        - $ref: '#/parameters/ResourceIdParam'
-        - name: model
-          in: body
-          required: true
-          schema:
-            $ref: './models/resource.yaml#/update'
-      responses:
-        200:
-          description: Resource response
-          schema:
-            $ref: './models/resource.yaml#/get'
-    delete:
-      operationId: deleteResource
-      description: Delete resource by ID
-      tags:
-        - resource
-      parameters:
-        - $ref: '#/parameters/ResourceIdParam'
-      responses:
-        204:
-          description: Resource deleted
-
-  /resources/{id}/url:
-    get:
-      operationId: getResourceUrl
-      description: Get the link to object(file) stored in resource
-      tags:
-      - resource
-      parameters:
-      - $ref: '#/parameters/ResourceIdParam'
-      - name: operation
-        in: query
-        type: string
-        enum:
-        - get
-        - put
-        default: get
-      responses:
-        200:
-          description: Url response
-          schema:
-            $ref: '#/definitions/UrlResponse'
-
-  /contents:
-    get:
-      operationId: findContent
-      description: Get list of contents
-      tags:
-        - content
-      parameters:
-        - $ref: './common.yaml#/parameters/LimitQuery'
-        - $ref: './common.yaml#/parameters/OffsetQuery'
-        - $ref: './common.yaml#/parameters/OrderByQuery'
-        - $ref: './common.yaml#/parameters/OrderDirectionQuery'
-      responses:
-        200:
-          description: List of Content
-          headers:
-            x-meta-total:
-              type: integer
-              minimum: 0
-              description: Get total number of entries in database
-          schema:
-            type: array
-            items:
-              $ref: './models/content.yaml#/get'
-    post:
-      operationId: createContent
-      description: Create new content
-      tags:
-        - content
-      parameters:
-        - name: model
-          in: body
-          required: true
-          schema:
-            $ref: './models/content.yaml#/create'
-      responses:
-        200:
-          description: Content response
-          schema:
-            $ref: './models/content.yaml#/get'
-
-  /contents/{id}:
-    get:
-      operationId: getContent
-      description: Get content by ID
-      tags:
-        - content
-      parameters:
-        - $ref: '#/parameters/ContentIdParam'
-      responses:
-        200:
-          description: Content response
-          schema:
-            $ref: './models/content.yaml#/get'
-    put:
-      operationId: updateContent
-      description: Update content by ID
-      tags:
-        - content
-      parameters:
-        - $ref: '#/parameters/ContentIdParam'
-        - name: model
-          in: body
-          required: true
-          schema:
-            $ref: './models/content.yaml#/update'
-      responses:
-        200:
-          description: Content response
-          schema:
-            $ref: './models/content.yaml#/get'
-    delete:
-      operationId: deleteContent
-      description: Delete content by ID
-      tags:
-        - content
-      parameters:
-        - $ref: '#/parameters/ContentIdParam'
-      responses:
-        204:
-          description: Content deleted
-
-parameters:
-  ResourceIdParam:
-    name: id
-    in: path
-    required: true
-    type: string
-    format: uuid
-  QueueNameParam:
-    name: name
-    in: path
-    required: true
-    type: string
-    minLength: 1
-    maxLength: 32
-  TaskIdParam:
-    name: id
-    in: path
-    required: true
-    type: string
-    format: uuid
-  ContentIdParam:
-    name: id
-    in: path
-    required: true
-    type: integer
-    format: int32
+  
 definitions:
-  UrlResponse:
+  Entity:
     type: object
     properties:
-      url:
+      id:
+        type: integer
+        format: int64
+      name:
         type: string
-        format: url
-      taskId:
+      type:
         type: string
-        format: uuid
-    required:
-      - url
+        enum: ['trait', 'freetext', 'keyword']
+      color:
+        type: string
+
+# Describe your paths here
+paths:
+  # This is a path endpoint. Change it.
+  /entity:
+    # This is a HTTP operation
+    post:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Add new `Entity` to your app
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: name
+          in: formData
+          description: Name of Entity
+          required: true
+          type: string
+        -
+          name: type
+          in: formData
+          description: Type of Entity. Can be "Trait", "Freetext", "Keyword"
+          required: true
+          type: string
+          enum: ['trait', 'freetext', 'keyword']
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        201:
+          description: Successful created
+    
+    get:
+      operationId: getAll
+      description: |
+        Get all `Entity` that available in your app
+      produces:
+        - application/json
+      responses:
+        200:
+          description: A list of your availble `Keyword`
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Entity'
+  
+  /expression:
+    post:
+      description: |
+        Add new `Expression` for `Entity`
+      parameters:
+        -
+          name: expression
+          in: body
+          description: A rich information Sentence
+          schema:
+            type: object
+            properties:
+              sentence:
+                type: string
+              entityList:
+                type: array
+                items:
+                  type: string
+              inlineEntities:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - entityId
+                  properties:
+                    entityId:
+                      type: string
+                    start:
+                      type: integer
+                      format: int64
+                    end:
+                      type: integer
+                      format: int64
+          required: true
+                
+              
+          
+      responses:
+        201:
+          description: Successful created new `Expression`
+    
