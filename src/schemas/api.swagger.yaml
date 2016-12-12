@@ -1,74 +1,46 @@
-# Example YAML to get you started quickly.
-# Be aware that YAML has indentation based scoping.
-# Code completion support is available so start typing for available options.
 swagger: '2.0'
-
-# This is your document metadata
 info:
-  version: "0.0.0"
+  version: "0.1.0"
   title: Vizbot API
-
 basePath: /api/v1
-  
-definitions:
-  Entity:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      name:
-        type: string
-      type:
-        type: string
-        enum: ['trait', 'freetext', 'keyword']
-      color:
-        type: string
 
-# Describe your paths here
+host: localhost:8080
+
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+
 paths:
-  # This is a path endpoint. Change it.
   /entity:
-    # This is a HTTP operation
-    post:
-      # Describe this verb here. Note: you can use markdown
-      description: |
-        Add new `Entity` to your app
-      # This is array of GET operation parameters:
-      parameters:
-        # An example parameter that is in query and is required
-        -
-          name: name
-          in: formData
-          description: Name of Entity
-          required: true
-          type: string
-        -
-          name: type
-          in: formData
-          description: Type of Entity. Can be "Trait", "Freetext", "Keyword"
-          required: true
-          type: string
-          enum: ['trait', 'freetext', 'keyword']
-      # Expected responses for this operation:
-      responses:
-        # Response code
-        201:
-          description: Successful created
-    
     get:
-      operationId: getAll
+      operationId: getAllEntity
       description: |
         Get all `Entity` that available in your app
-      produces:
-        - application/json
       responses:
         200:
           description: A list of your availble `Keyword`
           schema:
             type: array
             items:
-              $ref: '#/definitions/Entity'
+              $ref: './models/entity.yaml#/get'
+    post:
+      operationId: createEntity
+      description: |
+        Add new `Entity` to your app
+      parameters:
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: ./models/entity.yaml#/create
+      responses:
+        201:
+          description: Successful created
+          schema:
+            $ref: './models/entity.yaml#/get'
   
   /expression:
     post:
@@ -80,34 +52,12 @@ paths:
           in: body
           description: A rich information Sentence
           schema:
-            type: object
-            properties:
-              sentence:
-                type: string
-              entityList:
-                type: array
-                items:
-                  type: string
-              inlineEntities:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - entityId
-                  properties:
-                    entityId:
-                      type: string
-                    start:
-                      type: integer
-                      format: int64
-                    end:
-                      type: integer
-                      format: int64
+            $ref: ./models/expression.yaml#/create
           required: true
-                
-              
           
       responses:
         201:
           description: Successful created new `Expression`
+          schema:
+            $ref: './models/expression.yaml#/get'
     

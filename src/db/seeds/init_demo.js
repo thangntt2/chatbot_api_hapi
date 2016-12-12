@@ -1,4 +1,4 @@
-import uuid from 'uuid'
+// import uuid from 'uuid'
 
-export async function seed(knex) {
-}
+// export async function seed(knex) {
+// }

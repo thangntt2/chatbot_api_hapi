@@ -1,7 +1,7 @@
 import uuid from 'uuid'
 
 import Model from '../components/orm'
-import { Entity as entitySchema } from '../schemas/models/entity.yaml'
+import { get as entitySchema } from '../schemas/models/entity.yaml'
 
 export default class Entity extends Model {
 
@@ -19,4 +19,7 @@ export default class Entity extends Model {
     return 'Entity'
   }
 
+  inlineEntities() {
+    return this.hasMany('InlineEntity', 'entityId')
+  }
 }

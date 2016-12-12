@@ -7,8 +7,23 @@ export async function up(knex) {
     table.bigInteger('createdAt')
     table.bigInteger('updatedAt')
   })
+
+  await knex.schema.createTable('Expression', (table) => {
+    table.uuid('id').notNullable().primary()
+    table.string('sentence', 1024).notNullable()
+  })
+
+  await knex.schema.createTable('InlineEntity', (table) => {
+    table.uuid('id').notNullable().primary()
+    table.integer('start')
+    table.integer('end')
+    table.uuid('entityId').notNullable().references('Entity.id')
+    table.uuid('expressionId').notNullable().references('Expression.id')
+  })
 }
 
 export async function down(knex) {
   await knex.schema.dropTableIfExists('Entity')
+  await knex.schema.dropTableIfExists('Expression')
+  await knex.schema.dropTableIfExists('InlineEntity')
 }

@@ -1,0 +1,35 @@
+createWithExpression:
+  type: object
+  properties:
+    entityId:
+      type: string
+      format: uuid
+    start:
+      type: integer
+      format: int32
+    end:
+      type: integer
+      format: int32
+  required:
+    - entityId
+
+update:
+  type: object
+  allOf:
+    - $ref: '#/createWithExpression'
+    - properties:
+        expressionId:
+          type: string
+          format: uuid
+        id:
+          type: string
+          format: uuid
+    - required:
+        - entityId
+        - expressionId
+
+get:
+  type: object
+  allOf:
+    - $ref: './common.yaml#/BaseModel'
+    - $ref: '#/update'
