@@ -2,6 +2,7 @@ import * as entity from './controllers/entity'
 
 export default {
 
-  getAll: entity.getAll,
+  getAllEntity: entity.getAll,
+  createEntity: entity.create,
 
 }

@@ -1,11 +1,11 @@
 import uuid from 'uuid'
 
 import Model from '../components/orm'
-import { entity as EntitySchema } from '../schemas/models/entity.yaml'
+import { Entity as entitySchema } from '../schemas/models/entity.yaml'
 
-export default class Resource extends Model {
+export default class Entity extends Model {
 
-  static schema = EntitySchema
+  static schema = entitySchema;
 
   constructor(...args) {
     super(...args)
