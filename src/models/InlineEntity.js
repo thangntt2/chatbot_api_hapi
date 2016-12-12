@@ -1,7 +1,7 @@
 import uuid from 'uuid'
 
 import Model from '../components/orm'
-import { get as inlineEntitySchema } from '../schemas/models/entity.yaml'
+import { get as inlineEntitySchema } from '../schemas/models/inlineEntity.yaml'
 
 export default class InlineEntity extends Model {
 
