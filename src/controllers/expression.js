@@ -1,4 +1,5 @@
 import Boom from 'boom'
+import { map } from 'bluebird'
 import Expression from '../models/Expression'
 import InlineEntity from '../models/InlineEntity'
 
@@ -9,18 +10,16 @@ export async function create(req) {
     throw Boom.notAcceptable('Cannot create data')
   }
 
-  const inlineEntities = []
-
-  richExpression.inlineEntities.forEach(async (inlineEntity) => {
+  const inlineEntities = await map(richExpression.inlineEntities, async (inlineEntity) => {
     const entity = await InlineEntity.forge({
       ...inlineEntity,
       expressionId: expression.id,
     }).save()
-    inlineEntities.push(entity)
+    return entity.toJSON()
   })
 
   const resultExpression = {
-    ...expression,
+    ...expression.attributes,
     inlineEntities,
   }
   return (JSON.stringify(resultExpression))
