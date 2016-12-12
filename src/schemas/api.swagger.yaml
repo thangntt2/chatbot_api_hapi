@@ -44,6 +44,7 @@ paths:
   
   /expression:
     post:
+      operationId: createRichExpression
       description: |
         Add new `Expression` for `Entity`
       parameters:
