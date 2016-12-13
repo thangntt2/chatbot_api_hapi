@@ -61,4 +61,31 @@ paths:
           description: Successful created new `Expression`
           schema:
             $ref: './models/expression.yaml#/get'
-    
+    get:
+      operationId: getAllExpression
+      description: |
+        Get all `Expression`s with `Bind` Entity
+      responses:
+        200:
+          description: List of available `Expression` in your intent
+          schema:
+            type: array
+            items:
+              $ref: './models/expression.yaml#/get'
+  /expression/{expressionId}:
+    get:
+      description: |
+        Get all information about `Expression` with expressionId
+      parameters:
+        -
+          name: expressionId
+          in: path
+          description:
+            Id of `Expression`
+          type: string
+          required: true
+      responses:
+        200:
+          description: All `Expression` info, with all inline entities in it
+          schema:
+            $ref: './models/expression.yaml#/get'

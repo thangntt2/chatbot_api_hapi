@@ -5,4 +5,5 @@ export default {
   getAllEntity: entity.getAll,
   createEntity: entity.create,
   createRichExpression: expression.create,
+  getAllExpression: expression.getAll,
 }

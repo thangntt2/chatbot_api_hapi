@@ -24,3 +24,18 @@ export async function create(req) {
   }
   return (JSON.stringify(resultExpression))
 }
+
+export async function getAll() {
+  const expressions = await Expression.fetchAll()
+  if (!expressions) {
+    throw Boom.notFound('Data not found')
+  }
+
+  const richExpressions = await map(expressions.toArray(), async (expression) => {
+    const richExpression = await expression.fetch({
+      withRelated: ['inlineEntities'],
+    })
+    return richExpression.toJSON()
+  })
+  return richExpressions
+}
