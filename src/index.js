@@ -17,6 +17,7 @@ export async function main(server = new Server()) {
     router: {
       stripTrailingSlash: true,
     },
+    routes: { cors: true },
   })
 
   // don't log when test
