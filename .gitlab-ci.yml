@@ -1,4 +1,4 @@
-image: node:latest
+image: node:boron
 
 stages:
   - prepare_dependencies
@@ -8,10 +8,6 @@ stages:
 install_dependencies:
   stage: prepare_dependencies
   script:
-    - npm -v
-    - npm install -g semver
-    - npm -g install npm@latest
-    - npm -v
     - npm install
 
 migrate:
