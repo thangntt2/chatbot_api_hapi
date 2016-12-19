@@ -1,6 +1,4 @@
 image: node:latest
-before_script:
-  - npm install
 
 stages:
   - prepare_dependencies
@@ -10,6 +8,8 @@ stages:
 install_dependencies:
   stage: prepare_dependencies
   script:
+    - npm -v
+    - npm -g install npm@latest
     - npm install
 
 migrate:
