@@ -1,3 +1,4 @@
+images: node:latest
 before_script:
   - npm install
 
