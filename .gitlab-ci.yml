@@ -3,7 +3,7 @@ image: node:boron
 stages:
   - prepare_dependencies
   - migrate
-  - build
+  - run
 
 install_dependencies:
   stage: prepare_dependencies
@@ -13,9 +13,14 @@ install_dependencies:
 migrate:
   stage: migrate
   script:
+    - export MYSQL_HOST="localhost"
+    - export MYSQL_PORT="3306"
+    - export MYSQL_USER="root"
+    - export MYSQL_PASSWORD="nhuthienthu1"
+    - export MYSQL_DATABASE="vizbot"
     - npm run migrate:latest
 
-build:
-  stage: build
+run:
+  stage: run
   script:
-    - npm run build
+    - npm run start
