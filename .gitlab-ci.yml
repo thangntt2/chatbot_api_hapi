@@ -1,0 +1,22 @@
+before_script:
+  - npm install
+
+stages:
+  - prepare_dependencies
+  - migrate
+  - build
+
+install_dependencies:
+  stage: prepare
+  script:
+    - npm install
+
+migrate:
+  stage: migrate
+  script:
+    - npm run migrate:latest
+
+build:
+  stage: build
+  script:
+    - npm run build
