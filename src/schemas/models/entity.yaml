@@ -21,6 +21,8 @@ get:
           format: uuid
         color:
           type: string
+        description:
+          type: string
 
 update:
   type: object
@@ -31,4 +33,6 @@ update:
         type: string
         format: uuid
       color:
+        type: string
+      description:
         type: string

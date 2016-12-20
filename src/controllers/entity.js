@@ -8,7 +8,6 @@ export async function getAll() {
   if (!entities) {
     throw Boom.notFound('Data not found')
   }
-  console.log(entities.toJSON())
   return entities.toJSON()
 }
 
@@ -16,6 +15,7 @@ export async function create(req) {
   const entity = {
     ...req.payload,
     color: randomColor().hexString(),
+    description: 'user-define entity',
   }
   const content = await Entity.forge(entity).save()
   return content.toJSON()
