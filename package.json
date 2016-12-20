@@ -106,7 +106,18 @@
     "uuid": "^2.0.3",
     "vision": "^4.1.0",
     "webpack": "1.13.3",
-    "webpack-node-externals": "^1.5.4"
+    "webpack-node-externals": "^1.5.4",
+    "babel-cli": "^6.18.0",
+    "babel-core": "6.18.2",
+    "babel-eslint": "7.1.0",
+    "babel-loader": "6.2.7",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-istanbul": "^2.0.3",
+    "babel-plugin-lodash": "^3.2.9",
+    "babel-plugin-source-map-support-for-6": "0.0.5",
+    "babel-preset-babili": "0.0.8",
+    "babel-preset-env": "0.0.7",
+    "babel-preset-stage-2": "^6.18.0"
   },
   "optionalDependencies": {
     "bugger": "^2.3.0",
