@@ -1,7 +1,7 @@
 {
   "name": "Vizbot",
   "version": "0.0.1",
-  "description": "Vietnamese chatbot api server build on greate Hapi.js boilerplate (by Yoshi)",
+  "description": "Vietnamese chatbot api server build on greate Hapi.js boilerplate by Yoshi",
   "main": "index.js",
   "repository": {
     "type": "git",
