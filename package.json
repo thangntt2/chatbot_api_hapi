@@ -118,7 +118,7 @@
     "babel-preset-babili": "0.0.8",
     "babel-preset-env": "0.0.7",
     "babel-preset-stage-2": "^6.18.0",
-    "json-schema-loader": "0.0.3",
+    "json-schema-loader": "0.0.3"
   },
   "optionalDependencies": {
     "bugger": "^2.3.0",
