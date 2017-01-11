@@ -2,13 +2,22 @@ import { Server } from 'hapi'
 import good from 'good'
 import inert from 'inert'
 import vision from 'vision'
+import Boom from 'boom'
 import hapiSwaggeredUi from 'hapi-swaggered-ui'
 import * as overjoyAwait from 'overjoy-await'
 import * as overjoySwag from 'overjoy-swag'
+import * as jwtHapi from 'hapi-auth-jwt2'
 
 import { config } from './components/config'
 import routes from './routes'
 import api from './schemas/api.swagger.yaml'
+
+function validateToken(decoded, request, callback) {
+  if (!decoded.exp * 1000 > (new Date().getSeconds())) {
+    return callback(null, true)
+  }
+  return callback(Boom.unauthorized('access_token\'s expired'), false)
+}
 
 export async function main(server = new Server()) {
   server.connection({
@@ -58,6 +67,17 @@ export async function main(server = new Server()) {
       },
     })
   }
+
+  await server.register(jwtHapi)
+  await server.auth.strategy('authorization', 'jwt', {
+    key: 'CshTug6ZHncuFXhFQ1W93fiNeuZV0qC9wdD-Tmyws304nHOSSfmjXTdDEWYxrKEP',
+    validateFunc: validateToken,
+    verifyOptions: {
+      algorithms: ['HS256'],
+    },
+  })
+
+  await server.auth.default('authorization')
 
   // don't start server on test
   if (config('/server/listen')) {

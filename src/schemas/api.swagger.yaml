@@ -12,6 +12,14 @@ consumes:
   - application/json
 produces:
   - application/json
+securityDefinitions:
+  auth:
+    type: 'apiKey'
+    in: 'header'
+    name: 'authorization'
+
+security:
+  - auth: []
 
 paths:
   /entity:
