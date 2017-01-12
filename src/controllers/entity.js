@@ -14,6 +14,7 @@ export async function getAll() {
 export async function create(req) {
   const entity = {
     ...req.payload,
+    userId: req.auth.credentials.sub,
     color: randomColor().hexString(),
     description: 'user-define entity',
   }

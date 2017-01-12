@@ -13,7 +13,7 @@ import routes from './routes'
 import api from './schemas/api.swagger.yaml'
 
 function validateToken(decoded, request, callback) {
-  if (decoded.exp * 1000 > (new Date().getSeconds())) {
+  if (decoded.exp * 1000 > (new Date().getUTCMilliseconds())) {
     return callback(null, true)
   }
   return callback(Boom.unauthorized('access_token\'s expired'), false)
