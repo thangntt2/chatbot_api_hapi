@@ -7,6 +7,9 @@ stages:
 
 install_dependencies:
   stage: prepare_dependencies
+  artifacts:
+    paths:
+      - node_modules
   script:
     - npm install
 
