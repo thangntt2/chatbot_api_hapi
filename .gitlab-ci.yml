@@ -3,6 +3,7 @@ image: node:boron
 stages:
   - prepare_dependencies
   - migrate
+  - build
   - run
 
 install_dependencies:
@@ -23,7 +24,15 @@ migrate:
     - export MYSQL_DATABASE="vizbot"
     - npm run migrate:latest
 
+build:
+  stage: build
+  artifacts:
+    paths:
+      - dist
+  script:
+    - npm run build
+
 run:
   stage: run
   script:
-    - npm run start
+    - npm run start --production
