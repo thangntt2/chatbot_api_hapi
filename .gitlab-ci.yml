@@ -8,7 +8,7 @@ stages:
 
 install_dependencies:
   stage: prepare_dependencies
-  artifacts:
+  cache:
     paths:
       - node_modules
   script:
@@ -26,7 +26,7 @@ migrate:
 
 build:
   stage: build
-  artifacts:
+  cache:
     paths:
       - dist
   script:
