@@ -9,7 +9,7 @@ install_dependencies:
   cache:
     paths:
       - node_modules
-  artifact:
+  artifacts:
     paths:
       - dist
   
