@@ -6,12 +6,10 @@ stages:
 
 install_dependencies:
   stage: build
-  cache:
-    paths:
-      - node_modules
   artifacts:
     paths:
       - dist
+      - node_modules
   
   script:
     - npm install
