@@ -5,7 +5,7 @@ stages:
   - run
 
 install_dependencies:
-  stage: prepare_dependencies
+  stage: build
   cache:
     paths:
       - node_modules
