@@ -1,0 +1,23 @@
+sudo: false
+language: node_js
+node_js:
+  - "6.9.5"
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install
+
+env:
+    - MYSQL_HOST="localhost"
+    - MYSQL_PORT="3306"
+    - MYSQL_USER="root"
+    - MYSQL_PASSWORD="nhuthienthu1"
+    - MYSQL_DATABASE="vizbot"
+
+script:
+  - npm run build:production
+  - npm run migrate:latest
+  - npm run start --production
